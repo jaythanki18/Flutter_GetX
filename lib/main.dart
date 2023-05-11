@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_getx/home_screen.dart';
+import 'package:flutter_getx/screen_one.dart';
 import 'package:get/get.dart';
 
 void main() {
@@ -15,9 +16,12 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       theme: ThemeData(
         primarySwatch: Colors.blue,
-    
       ),
       home: HomeScreen(),
+      getPages: [
+        GetPage(name: '/', page: ()=>HomeScreen()),
+        GetPage(name: '/ScreenOne', page: ()=>ScreenOne())
+      ],
     );
   }
 }
