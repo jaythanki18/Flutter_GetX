@@ -1,7 +1,6 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_getx/image_picker_controller.dart';
+import 'package:flutter_getx/login_controller.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -12,7 +11,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  ImagePickerController controller=Get.put(ImagePickerController());
+  LoginController controller=Get.put(LoginController());
 
   @override
   void initState() {
@@ -27,22 +26,43 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text("GetX tutorials"),
       ),
       body: Obx((){
-        return Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Center(
-              child: CircleAvatar(
-                radius: 40,
-                backgroundImage: controller.imagePath.isNotEmpty ?
-                FileImage(File(controller.imagePath.toString())):
-                null
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TextFormField(
+                controller: controller.emailController.value,
+                decoration: InputDecoration(
+                  hintText: 'Email',
+
+                ),
               ),
-            ),
-            TextButton(onPressed: (){
-              controller.getImage();
-            }, child: Text('Pick image'))
-          ],
+              TextFormField(
+                controller: controller.passwordController.value,
+                decoration: InputDecoration(
+                  hintText: 'Password',
+
+                ),
+              ),
+              SizedBox(height: 50,),
+              Obx(() {
+                return InkWell(
+                  onTap: (){
+                    controller.loginAPI();
+                  },
+                  child: controller.loading.value ? CircularProgressIndicator() : Container(
+                    height: 45,
+                    color: Colors.grey,
+                    child: Center(
+                      child: Text("Login"),
+                    ),
+                  ),
+                );
+              })
+            ],
+          ),
         );
       })
     );
