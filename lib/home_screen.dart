@@ -14,20 +14,22 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Center(child: Text("GetX Tutorials")),
+        title: Text("GetX tutorials"),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Center(child: TextButton(onPressed: (){
-            //Get.to(ScreenOne(name: " Jay Thanki",));
-            Get.toNamed('/ScreenOne',arguments: [
-              ' Jay',
-              ' Thanki'
-            ]);
-            //Navigator.push(context, MaterialPageRoute(builder: (context)=>ScreenOne()));
-          },child: Text("Go to next screen"),),)
+          Container(
+            height: Get.height * 0.2,
+            width: Get.width * 0.8,
+            color: Colors.red,
+            child: Center(child: Text("Center"),),
+          ),
+          Container(
+            height: Get.height * 0.1 ,
+            width: Get.width * 0.8,
+            color: Colors.green,
+            child: Center(child: Text("Center"),),
+          )
         ],
       ),
     );
