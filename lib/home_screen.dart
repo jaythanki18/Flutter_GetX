@@ -16,8 +16,7 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text("GetX Tutorials"),
       ),
       body: Column(
-        children: [
-        ],
+        children: [],
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
