@@ -10,8 +10,9 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final CounterController controller=Get.put(CounterController());
 
+  NotificationController controller=Get.put(NotificationController());
+  bool notification=false;
   @override
   void initState() {
     // TODO: implement initState
@@ -24,16 +25,14 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text("GetX tutorials"),
       ),
-      body: Center(
-        child: Obx((){
-          return Text(controller.counter.toString(),style: TextStyle(fontSize: 60),);
-        }),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: (){
-          controller.incrementCounter();
-        },
-      ),
+      body: Column(
+        children: [
+          Text("Notifications"),
+          Obx(() => Switch(value: controller.notification.value, onChanged: (value){
+            controller.setNotification(value);
+          }))
+        ],
+      )
     );
   }
 }
