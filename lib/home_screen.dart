@@ -1,5 +1,7 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
-import 'package:flutter_getx/counter_controller.dart';
+import 'package:flutter_getx/image_picker_controller.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -10,9 +12,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  ImagePickerController controller=Get.put(ImagePickerController());
 
-  NotificationController controller=Get.put(NotificationController());
-  bool notification=false;
   @override
   void initState() {
     // TODO: implement initState
@@ -25,14 +26,25 @@ class _HomeScreenState extends State<HomeScreen> {
       appBar: AppBar(
         title: Text("GetX tutorials"),
       ),
-      body: Column(
-        children: [
-          Text("Notifications"),
-          Obx(() => Switch(value: controller.notification.value, onChanged: (value){
-            controller.setNotification(value);
-          }))
-        ],
-      )
+      body: Obx((){
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Center(
+              child: CircleAvatar(
+                radius: 40,
+                backgroundImage: controller.imagePath.isNotEmpty ?
+                FileImage(File(controller.imagePath.toString())):
+                null
+              ),
+            ),
+            TextButton(onPressed: (){
+              controller.getImage();
+            }, child: Text('Pick image'))
+          ],
+        );
+      })
     );
   }
 }
