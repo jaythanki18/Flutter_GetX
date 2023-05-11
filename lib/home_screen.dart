@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_getx/screen_one.dart';
 import 'package:get/get.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -17,18 +16,30 @@ class _HomeScreenState extends State<HomeScreen> {
         title: Text("GetX tutorials"),
       ),
       body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Container(
-            height: Get.height * 0.2,
-            width: Get.width * 0.8,
-            color: Colors.red,
-            child: Center(child: Text("Center"),),
+          ListTile(
+            title: Text('message'.tr),
+            subtitle: Text('name'.tr),
           ),
-          Container(
-            height: Get.height * 0.1 ,
-            width: Get.width * 0.8,
-            color: Colors.green,
-            child: Center(child: Text("Center"),),
+          SizedBox(
+            height: 50,
+          ),
+          Row(
+            children: [
+              OutlinedButton(
+                  onPressed: () {
+                    Get.updateLocale(Locale('en', 'US'));
+                  },
+                  child: Text("English")),
+              SizedBox(
+                width: 20,
+              ),
+              OutlinedButton(onPressed: () {
+                Get.updateLocale(Locale('guj','IND'));
+              }, child: Text("Gujarati"))
+            ],
           )
         ],
       ),
